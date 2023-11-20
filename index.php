@@ -1,10 +1,12 @@
 <?php 
     require 'vendor/autoload.php';
+    
+    use Html\Mvc\Controller\Controller;
     use Html\Mvc\Core\Core;
 
-    // Argumentos passados em Array são as funções public
+    $mvc = new Core($_GET['route'] ?? '/'); //Primeiro argumento pega a requisição segundo o Controller
+    $mvc->paginas('/produto', Controller::class);
+    $mvc->index('/', Controller::class);
+    $mvc->dispararRotas('erro', Controller::class);
 
-    $mvc = new Core($_GET['route'], 'Html\Mvc\Controller\Controller'); //Primeiro argumento pega a requisição segundo o Controller
-    $mvc->Routes('/', ['index']); // Página estática
-    $mvc->Routes('/ss/{variavel}', ['paginass']); //Página com argumentos
-    $mvc->DispararRotas();
+    //$mvc->Routes('/ss/{variavel}', ['paginass']); //Página com argumentos
